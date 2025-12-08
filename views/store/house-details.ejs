@@ -1,0 +1,166 @@
+<%- include('../partials/header') %>
+
+    <body>
+        <%- include('../partials/nav') %>
+            <main
+                class="container mx-auto bg-gradient-to-br from-white to-red-50 shadow-2xl rounded-2xl p-8 mt-10 max-w-7xl border border-red-100">
+                <div class="text-center mb-8">
+                    <h2
+                        class="text-4xl bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text text-transparent font-bold mb-2">
+                        🏡 House Details
+                    </h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto rounded-full"></div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- House Details Card - Wider Layout -->
+                    <div
+                        class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 w-full max-w-5xl border-2 border-red-100 hover:border-red-300">
+
+                        <!-- Grid Layout for Image and Details -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
+
+                            <!-- Image Section - Made Smaller -->
+                            <div class="lg:col-span-2 relative">
+                                <img src="/upload/<%= homeDetails.photoUrl %>" alt="<%= homeDetails.houseName %>"
+                                    class="w-full h-full min-h-80 max-h-80 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            </div>
+
+                            <!-- Details Section - Takes More Space -->
+                            <div
+                                class="lg:col-span-3 p-8 bg-gradient-to-br from-white to-red-25 flex flex-col justify-between">
+
+                                <!-- House Name -->
+                                <div class="mb-6">
+                                    <h3
+                                        class="text-3xl font-bold text-gray-800 mb-4 hover:text-red-600 transition-colors duration-200 leading-tight">
+                                        <%= homeDetails.houseName %>
+                                    </h3>
+
+                                    <!-- Location -->
+                                    <div class="flex items-center mb-6 text-gray-600">
+                                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                                            <i class="fas fa-map-marker-alt text-red-500 text-lg"></i>
+                                        </div>
+                                        <span class="text-lg font-medium">
+                                            <%= homeDetails.location %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Price and Rating Section -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <!-- Price Display -->
+                                    <div
+                                        class="bg-gradient-to-r from-red-500 to-rose-500 text-white p-6 rounded-2xl shadow-lg text-center">
+                                        <div class="text-3xl font-bold">Rs<%= homeDetails.price %>
+                                        </div>
+                                        <div class="text-sm opacity-90 mt-1">per night</div>
+                                    </div>
+
+                                    <!-- Rating Display -->
+                                    <div
+                                        class="flex items-center justify-center bg-yellow-50 px-6 py-4 rounded-2xl border-2 border-yellow-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="w-8 h-8 text-yellow-500 mr-3">
+                                            <path fill-rule="evenodd"
+                                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <div>
+                                            <span class="text-2xl font-bold text-gray-700">
+                                                <%= homeDetails.rating %>
+                                            </span>
+                                            <span class="text-gray-500 ml-1">/ 5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Favorite Button -->
+                                <div class="flex justify-center">
+                                    <%- include('../partials/favourite',{home:homeDetails}) %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description Section - Full Width -->
+                        <div class="bg-gradient-to-r from-red-50 to-rose-50 p-8 border-t-2 border-red-100">
+                            <div class="max-w-4xl mx-auto">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-red-500 p-3 rounded-full mr-4">
+                                        <i class="fas fa-info-circle text-white text-lg"></i>
+                                    </div>
+                                    <h4
+                                        class="text-2xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                                        About This Place
+                                    </h4>
+                                </div>
+
+                                <div class="bg-white p-6 rounded-2xl shadow-md border-2 border-red-100">
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        <% if (homeDetails.description && homeDetails.description.trim() !=='' ) { %>
+                                            <%= homeDetails.description %>
+                                                <% } else { %>
+                                                    Welcome to <strong class="text-red-600">
+                                                        <%= homeDetails.houseName %>
+                                                    </strong>, a beautiful property located in the heart of <strong
+                                                        class="text-red-600">
+                                                        <%= homeDetails.location %>
+                                                    </strong>. This stunning accommodation offers the perfect blend of
+                                                    comfort and convenience for your stay.
+
+                                                    <br><br>
+
+                                                    Featuring modern amenities and thoughtful design, this space is
+                                                    ideal for travelers seeking a memorable experience. The property
+                                                    boasts excellent reviews with a <strong class="text-yellow-600">
+                                                        <%= homeDetails.rating %>
+                                                    </strong> star rating, ensuring you'll have a wonderful stay.
+
+                                                    <br><br>
+
+                                                    Whether you're here for business or leisure, this property provides
+                                                    everything you need for a comfortable and enjoyable visit. Book your
+                                                    stay today and experience the best of <strong class="text-red-600">
+                                                        <%= homeDetails.location %>
+                                                    </strong>.
+                                                    <% } %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Info Section - Full Width -->
+                        <div class="bg-gradient-to-r from-orange-50 to-red-50 p-8 border-t-2 border-red-100">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+
+                                <!-- Feature Cards -->
+                                <div
+                                    class="bg-white p-6 rounded-xl shadow-md border-2 border-red-100 hover:border-red-300 transition-all duration-200">
+                                    <div class="text-red-500 text-2xl mb-2">🏠</div>
+                                    <h4 class="font-semibold text-gray-800">Premium Stay</h4>
+                                    <p class="text-gray-600 text-sm mt-1">Comfortable accommodation</p>
+                                </div>
+
+                                <div
+                                    class="bg-white p-6 rounded-xl shadow-md border-2 border-orange-100 hover:border-orange-300 transition-all duration-200">
+                                    <div class="text-orange-500 text-2xl mb-2">📍</div>
+                                    <h4 class="font-semibold text-gray-800">Great Location</h4>
+                                    <p class="text-gray-600 text-sm mt-1">Prime area access</p>
+                                </div>
+
+                                <div
+                                    class="bg-white p-6 rounded-xl shadow-md border-2 border-rose-100 hover:border-rose-300 transition-all duration-200">
+                                    <div class="text-rose-500 text-2xl mb-2">⭐</div>
+                                    <h4 class="font-semibold text-gray-800">Top Rated</h4>
+                                    <p class="text-gray-600 text-sm mt-1">Excellent reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+    </body>
+
+    </html>

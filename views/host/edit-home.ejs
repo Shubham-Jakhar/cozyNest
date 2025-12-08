@@ -1,0 +1,81 @@
+<%- include('../partials/header')%>
+
+    <body>
+        <%- include('../partials/nav')%>
+            <main
+                class="container mx-auto mt-8 p-8 bg-gradient-to-br from-white to-red-50 rounded-2xl shadow-2xl max-w-6xl border border-red-100">
+                <div class="text-center mb-8">
+                    <h1
+                        class="text-4xl bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text text-transparent font-bold mb-2">
+                        <%= editing? 'Update' :'Register'%> Your Home on AirBnB
+                    </h1>
+                    <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto rounded-full"></div>
+                </div>
+                <form action="/<%= editing? 'host/edit-home': 'host/add-home'%>" method="POST"
+                    enctype="multipart/form-data" class="max-w-5xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-red-100">
+                        <input type="hidden" value="<%= editing? home._id : ''%>" name="id">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <label for="houseName" class="block text-sm font-semibold text-gray-700">
+                                    🏡 House Name
+                                </label>
+                                <input id="houseName" type="text" name="houseName" placeholder="House Name"
+                                    value="<%= editing?home.houseName:''%>"
+                                    class="w-full px-4 py-3 border-2 border-red-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 hover:border-red-300"
+                                    required />
+                            </div>
+                            <div class="space-y-2">
+                                <label for="price" class="block text-sm font-semibold text-gray-700">
+                                    💰 Price (per night)
+                                </label>
+                                <input id="price" type="number" name="price" placeholder="Price"
+                                    value="<%= editing? home.price:''%>"
+                                    class="w-full px-4 py-3 border-2 border-orange-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-orange-300"
+                                    required />
+                            </div>
+                            <div class="space-y-2">
+                                <label for="location" class="block text-sm font-semibold text-gray-700">
+                                    📍 Location
+                                </label>
+                                <input id="location" type="text" name="location" placeholder="Location"
+                                    value="<%= editing?home.location:'' %>"
+                                    class="w-full px-4 py-3 border-2 border-pink-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 hover:border-pink-300"
+                                    required />
+                            </div>
+                            <div class="space-y-2 md:col-span-2">
+                                <label for="photoUrl" class="block text-sm font-semibold text-gray-700">
+                                    📸 Image
+                                </label>
+                                <input id="photoUrl" type="file" name="photoUrl" placeholder="Link of images"
+                                    accept="image/*"
+                                    class="w-full px-4 py-3 border-2 border-rose-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-all duration-200 hover:border-rose-300" />
+                            </div>
+                            <div class="space-y-2">
+                                <label for="rating" class="block text-sm font-semibold text-gray-700">
+                                    ⭐ Rating (1-5)
+                                </label>
+                                <input id="rating" type="text" name="rating" placeholder="rating"
+                                    value="<%= editing?home.rating:'' %>"
+                                    class="w-full px-4 py-3 border-2 border-amber-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 hover:border-amber-300"
+                                    required />
+                            </div>
+                            <div class="space-y-2 md:col-span-2 lg:col-span-3">
+                                <label for="description" class="block text-sm font-semibold text-gray-700">
+                                    📝 Description
+                                </label>
+                                <textarea id="description" name="description" placeholder="Description of house"
+                                    rows="4"
+                                    class="w-full px-4 py-3 border-2 border-red-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 hover:border-red-300 resize-vertical"><%= editing?home.description:'' %></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <input type="submit" value="<%= editing?' Update Home':'Register Home'%>"
+                            class="group relative flex justify-center items-center py-4 px-8 border border-transparent text-lg font-semibold rounded-2xl text-white bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl min-w-64" />
+                    </div>
+                </form>
+            </main>
+    </body>
+
+    </html>

@@ -1,0 +1,66 @@
+<header class="bg-gradient-to-r from-red-500 via-red-600 to-rose-500 text-white shadow-xl border-b-2 border-red-300">
+    <nav class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/" class="hover:cursor-pointer">
+                    <div class="relative w-24 h-auto">
+                        <img src="/images/logoCozyNest.png" alt="logoImage" class="object-contain w-full h-full">
+                    </div>
+                </a>
+            </div>
+            <ul class="flex items-center space-x-2">
+                <li>
+                    <a href="/"
+                        class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 <%= currPage === 'Home' ? 'bg-white text-red-600 shadow-lg' : 'hover:bg-red-400 hover:shadow-md' %>">
+                        Home
+                    </a>
+                </li>
+                <% if(isLoggedIn){%>
+                    <% if(user && user.usertype==='guest' ){%>
+                        <li>
+                            <a href="/favourite-list"
+                                class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 <%= currPage === 'favourite-list' ? 'bg-white text-red-600 shadow-lg' : 'hover:bg-red-400 hover:shadow-md' %>">
+                                Favourites
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/bookings"
+                                class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 <%= currPage === 'bookings' ? 'bg-white text-red-600 shadow-lg' : 'hover:bg-red-400 hover:shadow-md' %>">
+                                Bookings
+                            </a>
+                        </li>
+                        <%} else{%>
+                            <li>
+                                <a href="/host/host-homes"
+                                    class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 <%= currPage === 'host-homes' ? 'bg-white text-red-600 shadow-lg' : 'hover:bg-red-400 hover:shadow-md' %>">
+                                    Host homes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/host/add-home"
+                                    class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 <%= currPage === 'addHome' ? 'bg-white text-red-600 shadow-lg' : 'hover:bg-red-400 hover:shadow-md' %>">
+                                    Add Home
+                                </a>
+                            </li>
+                            <%}%>
+                                <li>
+                                    <form action="/logout" method="POST" class="inline-block">
+                                        <button type="submit"
+                                            class="py-3 px-5 rounded-full font-medium transition-all duration-300 transform hover:scale-105 hover:bg-red-400 hover:shadow-md bg-red-700 border-2 border-red-600">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                                <% }%>
+                                    <% if(!isLoggedIn){%>
+                                        <li>
+                                            <a href="/login"
+                                                class="py-3 px-6 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 bg-white text-red-600 hover:bg-red-100 hover:text-red-700 shadow-lg hover:shadow-xl border-2 border-white">
+                                                Login
+                                            </a>
+                                        </li>
+                                        <% }%>
+            </ul>
+        </div>
+    </nav>
+</header>
