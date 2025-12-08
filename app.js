@@ -10,7 +10,7 @@ const rootDir = require('./utils/pathUtils');
 const path = require('path');
 const { default: mongoose } = require('mongoose');
 const { authRouter } = require('./routes/authRouter');
-const multer = require('multer');
+const multer = require('multer')
 const DB_PATH = process.env.DBPATH;
 
 
