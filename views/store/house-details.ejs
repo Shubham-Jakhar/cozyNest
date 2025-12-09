@@ -17,7 +17,7 @@
                         class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 w-full max-w-5xl border-2 border-red-100 hover:border-red-300">
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
                             <div class="lg:col-span-2 relative">
-                                <img src="<%=home.photoUrl.startsWith('http') ? home.photoUrl : '/upload/'+home.photoUrl %>" alt="<%= homeDetails.houseName %>"
+                                <img src="<%=homeDetails.photoUrl.startsWith('http') ? homeDetails.photoUrl : '/upload/'+homeDetails.photoUrl %>" alt="<%= homeDetails.houseName %>"
                                     class="w-full h-full min-h-80 max-h-80 object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                             </div>
