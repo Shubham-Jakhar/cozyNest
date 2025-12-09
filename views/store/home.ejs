@@ -9,30 +9,22 @@
             </h2>
             <div class="w-24 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto rounded-full"></div>
         </div>
-        
         <div class="flex flex-wrap justify-center gap-8">
             <% registredHome.forEach(home=> { %>
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full max-w-sm border-2 border-red-100 hover:border-red-300">
-                    <!-- Image Section -->
                     <div class="relative">
-                        <img src="/upload/<%= home.photoUrl%>" alt="<%= home.houseName %>" class="w-full h-48 object-cover">
+                        <img src="<%=home.photoUrl.startsWith('http') ? home.photoUrl : '/upload/'+home.photoUrl %>" alt="<%= home.houseName %>" class="w-full h-48 object-cover">
                     </div>
-                    
-                    <!-- Content Section -->
                     <div class="p-6 bg-gradient-to-br from-white to-red-25">
                         <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-red-600 transition-colors duration-200">
                             <%= home.houseName %>
                         </h3>
-                        
-                        <!-- Location -->
                         <div class="flex items-center mb-4 text-gray-600">
                             <div class="bg-red-100 p-2 rounded-full mr-3">
                                 <i class="fas fa-map-marker-alt text-red-500"></i>
                             </div>
                             <span class="text-sm font-medium"><%= home.location %></span>
                         </div>
-                        
-                        <!-- Price and Rating -->
                         <div class="flex justify-between items-center mb-6">
                             <div class="bg-gradient-to-r from-red-500 to-rose-500 text-white px-4 py-2 rounded-full shadow-md">
                                 <span class="text-lg font-bold">Rs<%= home.price %></span>
@@ -45,8 +37,6 @@
                                 <span class="text-gray-700 font-semibold"><%= home.rating %></span>
                             </div>
                         </div>
-                        
-                        <!-- Details Button and Favorite -->
                         <div class="flex gap-3 items-center">
                             <a href="home/<%= home._id%>" class="flex-1 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center group">
                                 <span class="mr-2">📋</span>
@@ -55,8 +45,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </a>
-                            
-                            <!--Favorite Button -->
                                 <%- include('../partials/favourite',{home:home}) %>
                         </div>
                     </div>

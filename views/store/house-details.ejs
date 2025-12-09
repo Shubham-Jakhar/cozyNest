@@ -13,32 +13,21 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-6">
-                    <!-- House Details Card - Wider Layout -->
                     <div
                         class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 w-full max-w-5xl border-2 border-red-100 hover:border-red-300">
-
-                        <!-- Grid Layout for Image and Details -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0">
-
-                            <!-- Image Section - Made Smaller -->
                             <div class="lg:col-span-2 relative">
-                                <img src="/upload/<%= homeDetails.photoUrl %>" alt="<%= homeDetails.houseName %>"
+                                <img src="<%=home.photoUrl.startsWith('http') ? home.photoUrl : '/upload/'+home.photoUrl %>" alt="<%= homeDetails.houseName %>"
                                     class="w-full h-full min-h-80 max-h-80 object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                             </div>
-
-                            <!-- Details Section - Takes More Space -->
                             <div
                                 class="lg:col-span-3 p-8 bg-gradient-to-br from-white to-red-25 flex flex-col justify-between">
-
-                                <!-- House Name -->
                                 <div class="mb-6">
                                     <h3
                                         class="text-3xl font-bold text-gray-800 mb-4 hover:text-red-600 transition-colors duration-200 leading-tight">
                                         <%= homeDetails.houseName %>
                                     </h3>
-
-                                    <!-- Location -->
                                     <div class="flex items-center mb-6 text-gray-600">
                                         <div class="bg-red-100 p-3 rounded-full mr-4">
                                             <i class="fas fa-map-marker-alt text-red-500 text-lg"></i>
@@ -48,18 +37,13 @@
                                         </span>
                                     </div>
                                 </div>
-
-                                <!-- Price and Rating Section -->
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                                    <!-- Price Display -->
                                     <div
                                         class="bg-gradient-to-r from-red-500 to-rose-500 text-white p-6 rounded-2xl shadow-lg text-center">
                                         <div class="text-3xl font-bold">Rs<%= homeDetails.price %>
                                         </div>
                                         <div class="text-sm opacity-90 mt-1">per night</div>
                                     </div>
-
-                                    <!-- Rating Display -->
                                     <div
                                         class="flex items-center justify-center bg-yellow-50 px-6 py-4 rounded-2xl border-2 border-yellow-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -76,15 +60,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Favorite Button -->
                                 <div class="flex justify-center">
                                     <%- include('../partials/favourite',{home:homeDetails}) %>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Description Section - Full Width -->
                         <div class="bg-gradient-to-r from-red-50 to-rose-50 p-8 border-t-2 border-red-100">
                             <div class="max-w-4xl mx-auto">
                                 <div class="flex items-center mb-6">
@@ -130,12 +110,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Additional Info Section - Full Width -->
                         <div class="bg-gradient-to-r from-orange-50 to-red-50 p-8 border-t-2 border-red-100">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-
-                                <!-- Feature Cards -->
                                 <div
                                     class="bg-white p-6 rounded-xl shadow-md border-2 border-red-100 hover:border-red-300 transition-all duration-200">
                                     <div class="text-red-500 text-2xl mb-2">🏠</div>

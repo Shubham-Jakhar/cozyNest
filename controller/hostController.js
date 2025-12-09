@@ -1,6 +1,11 @@
 const Home = require("../models/home");
 const User = require('../models/user');
-
+const { v2: cloudinary } = require('cloudinary');
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 exports.getAddHome = (req, res, next) => {
     res.render('host/edit-home', {
         editing: false,
@@ -12,20 +17,29 @@ exports.getAddHome = (req, res, next) => {
 }
 
 exports.postAddHome = (req, res, next) => {
-    
+
     const { houseName, price, location, rating, description, id } = req.body;
-    console.log(req.file);
-    if(!req.file){
+    if (!req.file) {
         res.status(402).send("photo not found");
     }
-    const photoUrl = req.file.filename;
-    const home = new Home({ houseName, price, location, photoUrl, rating, description });
-    home.save().then(() => {
-        console.log("data written successfully");
-    }).catch((err) => {
-        console.log("error while writting", err);
-    });
-    res.redirect('/host/host-homes');
+    const buffer = req.file.buffer;
+    cloudinary.uploader.upload_stream({ folder: "cozyNest" },
+        (err, result) => {
+            if (err) {
+                console.log("cloudinary upload error", err);
+                return res.status(500).send("image upload failed");
+            }
+
+            const photoUrl = result.secure_url;
+            const home = new Home({ houseName, price, location, photoUrl, rating, description });
+            home.save().then(() => {
+                console.log("data written successfully");
+            }).catch((err) => {
+                console.log("error while writting", err);
+            });
+            res.redirect('/host/host-homes');
+        }
+    ).end(buffer);
 };
 
 exports.getHostHome = (req, res, next) => {
@@ -64,8 +78,8 @@ exports.postEditHome = (req, res, next) => {
         home.location = location;
         home.rating = rating;
         home.description = description;
-        if(req.file){
-            home.photoUrl=photoUrl;
+        if (req.file) {
+            home.photoUrl = photoUrl;
         }
         home.save().then(() => {
             console.log("home updated")

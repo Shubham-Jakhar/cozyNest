@@ -10,10 +10,7 @@ const rootDir = require('./utils/pathUtils');
 const path = require('path');
 const { default: mongoose } = require('mongoose');
 const { authRouter } = require('./routes/authRouter');
-const multer = require('multer')
 const DB_PATH = process.env.DBPATH;
-
-
 
 
 app.set('view engine', 'ejs');
@@ -24,30 +21,12 @@ const store= new mongodbStore({
     collection:'session'
 })
 
-const randomString=(length)=>{
-    const chars = 'abcdefghijklmnopqrstuvwxyz';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-}
-const storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null, path.join(rootDir, 'public', 'upload'));
-    },
-    filename:(req,file,cb)=>{
-        cb(null,randomString(12)+'-'+file.originalname);
-    }
-})
-const multerOption={
-    storage
-}
-app.use(express.urlencoded());
-app.use(multer(multerOption).single('photoUrl'));
+const multer = require('multer')
+const storage=multer.memoryStorage();
+const upload = multer({ storage });
+app.use(express.urlencoded({extended: true}));
+app.use(upload.single('photoUrl'));
 app.use(express.static(path.join(rootDir, "public")));
-app.use("/upload",express.static(path.join(rootDir,"upload")));
-app.use("/host/upload",express.static(path.join(rootDir,"upload")));
 
 app.use(session({
     secret:"shubham jakhar",
